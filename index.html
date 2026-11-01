@@ -4,22 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>拖延症研究所 | Procrastination Center</title>
+    <!-- 浏览器标签页的绿色小乌龟图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐢</text></svg>">
+    <!-- 引入 FontAwesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入我们的果冻风样式表 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 导航栏占位符，会自动由 nav.js 加载 -->
     <nav id="nav-placeholder"></nav>
 
+    <!-- 网页主体内容 -->
     <div class="container">
         <div class="hero">
-            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cat sleeping on keyboard">
+            <!-- 💡 注意这里：我用了一张在线的呆萌猫咪图。
+                 如果你想用你自己电脑里的图，请把引号里的链接删掉，换成 "cat.jpg" -->
+            < img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Cute cat">
+            
+            <!-- 带有 data-i18n 属性的文字，会自动被中英双语脚本接管 -->
             <h1 data-i18n="index_title">欢迎来到拖延症研究所</h1>
             <p><strong data-i18n="index_slogan">能明天做的事，今天绝不开始。</strong></p >
         </div>
-        <p data-i18n="index_desc">这里是一个专门研究“为什么我们会把重要的事情拖到明天”的神秘组织。本网站旨在为您提供最舒适的摸鱼体验。请随意浏览，反正你现在的正事也没做。</p >
+        
+        <!-- 简介文本，加了居中对齐样式 -->
+        <p data-i18n="index_desc" style="text-align: center; font-size: 1.1rem;">
+            这里是一个专门研究“为什么我们会把重要的事情拖到明天”的神秘组织。本网站旨在为您提供最舒适的摸鱼体验。请随意浏览，反正你现在的正事也没做。
+        </p >
     </div>
 
+    <!-- 页脚占位符，会自动由 nav.js 加载你名字和学号的页脚 -->
+    <footer id="footer-placeholder"></footer>
+
+    <!-- 引入脚本文件 -->
     <script src="nav.js"></script>
     <script src="i18n.js"></script>
 </body>
