@@ -4,60 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>语录 | Quotes</title>
+    <!-- 浏览器标签页的小乌龟图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐢</text></svg>">
+    <!-- FontAwesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 果冻风样式表 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 导航栏占位符 -->
     <nav id="nav-placeholder"></nav>
 
     <div class="container">
+        <!-- 顶部：随机抽取一条语录的果冻卡片 -->
         <div id="random-quote-box">
-            <h2 data-i18n="quotes_random">今日随机借口：</h2>
+            <h2 data-i18n="quotes_random" style="font-size: 1.1rem; color: #64748b; margin-bottom: 10px;">今日随机借口：</h2>
             <p id="random-quote-text"></p >
         </div>
 
-        <h2 data-i18n="quotes_list_title">拖延症语录大全 (15条)</h2>
+        <!-- 语录列表标题 -->
+        <h2 data-i18n="quotes_list_title" style="margin-bottom: 1.5rem; color: var(--text-color); text-align: center;">拖延症语录大全 (15条)</h2>
+        
+        <!-- 语录列表容器，里面的内容由下面的 JS 动态生成 -->
         <ul class="list-items" id="quotes-list"></ul>
     </div>
 
+    <!-- 页脚占位符 -->
+    <footer id="footer-placeholder"></footer>
+
+    <!-- 引入脚本：顺序不能乱 -->
     <script src="nav.js"></script>
     <script src="i18n.js"></script>
+    
+    <!-- 页面专属脚本：处理语录显示和随机抽取 -->
     <script>
+        // 语录数据（中英双语）
         const quotesData = {
-            zh: [
-                "明天又是新的一天，不如明天再做。", "我拖延，是因为我有足够的时间。", "唯一比写代码更痛苦的，是开始写代码。",
-                "Deadline（死线）是第一生产力。", "工作会膨胀，直到占满所有可用时间。", "让我先刷五分钟手机……（两小时后）",
-                "所谓完美主义，就是不敢开始。", "能躺着绝不坐着，能坐着绝不站着。", "我不是在拖延，我只是在进行长时间的思考。",
-                "今日事，明日毕，后天大扫除。", "时间就像海绵里的水，只要你愿意挤……就会发现全被你漏光了。", "有人相爱，有人夜里看海，有人凌晨三点还在赶DDL。",
-                "别骂了别骂了，这就去干活……算了，明天再说吧。", "不着急，先喝杯咖啡。", "如果你把今天的事拖到明天，你明天的压力会翻倍。"
-            ],
-            en: [
-                "Tomorrow is a new day, might as well do it then.", "I procrastinate because I have plenty of time.", "The only thing more painful than writing code is starting to write code.",
-                "Deadlines are the primary productive force.", "Work expands to fill all the time available.", "Let me just scroll for five minutes... (Two hours later)",
-                "Perfectionism is just the fear of starting.", "Never stand if you can sit, never sit if you can lie down.", "I'm not procrastinating, I'm just thinking for a long time.",
-                "Today's work, tomorrow's finish, the day after for deep cleaning.", "Time is like water in a sponge... you squeeze it and it leaks away.", "Some people fall in love, some watch the sea at night, some are still rushing deadlines at 3 AM.",
-                "Stop yelling, I'm going to work... actually, let's do it tomorrow.", "No rush, let me grab a coffee first.", "If you put off today's work until tomorrow, your stress doubles tomorrow."
-            ]
+            zh: ["明天又是新的一天，不如明天再做。", "我拖延，是因为我有足够的时间。", "唯一比写代码更痛苦的，是开始写代码。", "Deadline（死线）是第一生产力。", "工作会膨胀，直到占满所有可用时间。", "让我先刷五分钟手机……（两小时后）", "所谓完美主义，就是不敢开始。", "能躺着绝不坐着，能坐着绝不站着。", "我不是在拖延，我只是在进行长时间的思考。", "今日事，明日毕，后天大扫除。", "时间就像海绵里的水，只要你愿意挤……就会发现全被你漏光了。", "有人相爱，有人夜里看海，有人凌晨三点还在赶DDL。", "别骂了别骂了，这就去干活……算了，明天再说吧。", "不着急，先喝杯咖啡。", "如果你把今天的事拖到明天，你明天的压力会翻倍。"],
+            en: ["Tomorrow is a new day, might as well do it then.", "I procrastinate because I have plenty of time.", "The only thing more painful than writing code is starting to write code.", "Deadlines are the primary productive force.", "Work expands to fill all the time available.", "Let me just scroll for five minutes... (Two hours later)", "Perfectionism is just the fear of starting.", "Never stand if you can sit, never sit if you can lie down.", "I'm not procrastinating, I'm just thinking for a long time.", "Today's work, tomorrow's finish, the day after for deep cleaning.", "Time is like water in a sponge... you squeeze it and it leaks away.", "Some people fall in love, some watch the sea at night, some are still rushing deadlines at 3 AM.", "Stop yelling, I'm going to work... actually, let's do it tomorrow.", "No rush, let me grab a coffee first.", "If you put off today's work until tomorrow, your stress doubles tomorrow."]
         };
 
+        // 渲染语录的函数
         function renderQuotes() {
             const lang = localStorage.getItem('site_lang') || 'zh';
             const quotes = quotesData[lang];
-
+            
+            // 渲染列表
             const listContainer = document.getElementById('quotes-list');
             listContainer.innerHTML = '';
             quotes.forEach(q => {
                 const li = document.createElement('li');
+                // 加上小气泡图标
                 li.innerHTML = `<i class="fa-solid fa-comment-dots"></i> <span>${q}</span>`;
                 listContainer.appendChild(li);
             });
 
+            // 随机抽取一条显示在顶部
             const randomIndex = Math.floor(Math.random() * quotes.length);
             document.getElementById('random-quote-text').textContent = `“${quotes[randomIndex]}”`;
         }
 
+        // 页面加载时执行一次
         document.addEventListener("DOMContentLoaded", renderQuotes);
+        // 当用户点击切换语言时，重新渲染一次
         document.addEventListener("languageChanged", renderQuotes);
     </script>
 </body>
