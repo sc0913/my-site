@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究项目 | Projects</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐢</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="nav-placeholder"></nav>
+
+    <div class="container">
+        <h1 data-i18n="projects_title">我们的研究项目</h1>
+        <p data-i18n="projects_desc">以下是本研究所未来五年（或者可能拖到十年）的计划：</p >
+        
+        <ul class="list-items" id="projects-list"></ul>
+    </div>
+
+    <script src="nav.js"></script>
+    <script src="i18n.js"></script>
+    <script>
+        // 注意这里加了 FontAwesome 图标标签 <i>
+        const projectsData = {
+            zh: [
+                "<i class='fa-solid fa-clock'></i> <span><strong>研究课题 A：</strong> 探究“整点开始”定律——为什么非要等到 10:00 或 14:30 才能开始工作。</span>",
+                "<i class='fa-solid fa-brain'></i> <span><strong>研究课题 B：</strong> 论“把大任务拆解成小任务，然后连小任务也不想做”的心理机制。</span>",
+                "<i class='fa-solid fa-hourglass-half'></i> <span><strong>研究课题 C：</strong> 计算摸鱼一小时和努力工作一小时，哪个时间过得更快。</span>",
+                "<i class='fa-solid fa-user-secret'></i> <span><strong>研究课题 D：</strong> 如何优雅地假装自己非常忙碌，以应对老板的检查。</span>",
+                "<i class='fa-solid fa-wand-magic-sparkles'></i> <span><strong>研究课题 E：</strong> 发明一种能让时间静止，好让你补完所有作业的机器（正在画图纸）。</span>"
+            ],
+            en: [
+                "<i class='fa-solid fa-clock'></i> <span><strong>Project A:</strong> Study the 'O'clock Rule'—why we can only start working at exactly 10:00 or 14:30.</span>",
+                "<i class='fa-solid fa-brain'></i> <span><strong>Project B:</strong> On the psychological mechanism of 'breaking a big task into small ones, and then not wanting to do the small ones either'.</span>",
+                "<i class='fa-solid fa-hourglass-half'></i> <span><strong>Project C:</strong> Calculate whether time passes faster when slacking off or working hard.</span>",
+                "<i class='fa-solid fa-user-secret'></i> <span><strong>Project D:</strong> How to elegantly pretend to be very busy when the boss is checking.</span>",
+                "<i class='fa-solid fa-wand-magic-sparkles'></i> <span><strong>Project E:</strong> Invent a machine that freezes time so you can finish all your homework (blueprints in progress).</span>"
+            ]
+        };
+
+        function renderProjects() {
+            const lang = localStorage.getItem('site_lang') || 'zh';
+            const listContainer = document.getElementById('projects-list');
+            listContainer.innerHTML = '';
+            projectsData[lang].forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = item;
+                listContainer.appendChild(li);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", renderProjects);
+        document.addEventListener("languageChanged", renderProjects);
+    </script>
+</body>
+</html>

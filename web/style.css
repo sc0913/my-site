@@ -1,0 +1,186 @@
+/* style.css */
+:root {
+    --bg-color: #f4f1ea;
+    --text-color: #333;
+    --primary-color: #6b8e23;
+    --nav-bg: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* 导航栏样式 */
+nav {
+    background-color: var(--nav-bg);
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+nav a i {
+    margin-right: 6px;
+}
+
+/* 主体内容容器 */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* 英雄区大图 (Hero Image) */
+.hero {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.hero h1 {
+    margin-top: 1.5rem;
+    font-size: 2.5rem;
+}
+
+/* 随机语录区 */
+#random-quote-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+    border-left: 5px solid var(--primary-color);
+}
+
+#random-quote-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--primary-color);
+}
+
+/* 列表样式 */
+ul.list-items {
+    list-style: none;
+}
+
+ul.list-items li {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+}
+
+ul.list-items li i {
+    color: var(--primary-color);
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   无用机器按钮（恢复成瞬间移动）
+========================================= */
+#useless-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    /* 去掉了平滑过渡，恢复瞬移 */
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* =========================================
+   游戏区域（草地和小乌龟）
+========================================= */
+#game-area {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(to bottom, #e0f7fa 0%, #a5d6a7 100%);
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 1rem;
+    border: 3px dashed #81c784;
+}
+
+#target {
+    width: 60px;
+    height: 60px;
+    font-size: 50px;
+    line-height: 60px;
+    text-align: center;
+    background-color: transparent;
+    position: absolute;
+    display: none;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+}
+
+#target:active {
+    transform: scale(0.8);
+}
+
+/* 通用按钮样式 */
+button {
+    cursor: pointer;
+}
+
+/* 响应式设计（手机端） */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    #random-quote-text {
+        font-size: 1.2rem;
+    }
+}
