@@ -1,9 +1,13 @@
-/* style.css */
+/* 引入圆润可爱的字体 */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap');
+
 :root {
-    --bg-color: #f4f1ea;
-    --text-color: #333;
-    --primary-color: #6b8e23;
-    --nav-bg: #fff;
+    --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --text-color: #334155;
+    --primary-color: #10b981;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
 }
 
 * {
@@ -13,39 +17,54 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
+    font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
     color: var(--text-color);
-    line-height: 1.6;
+    line-height: 1.8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* 导航栏样式 */
+/* 悬浮胶囊导航栏 */
 nav {
-    background-color: var(--nav-bg);
-    padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: sticky;
-    top: 0;
+    top: 20px;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 800px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    box-shadow: var(--shadow);
+    padding: 10px 20px;
     z-index: 100;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 20px;
+    flex-wrap: wrap;
 }
 
 nav a {
     text-decoration: none;
     color: var(--text-color);
-    font-weight: bold;
-    transition: color 0.3s;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 
 nav a:hover {
+    background: rgba(16, 185, 129, 0.1);
     color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 nav a i {
@@ -54,98 +73,141 @@ nav a i {
 
 /* 主体内容容器 */
 .container {
+    flex: 1;
     max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-/* 英雄区大图 (Hero Image) */
+h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+/* 首页大图 */
 .hero {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease;
 }
 
 .hero img {
     width: 100%;
-    max-height: 400px;
+    max-height: 450px;
     object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.hero img:hover {
+    transform: scale(1.02);
 }
 
 .hero h1 {
-    margin-top: 1.5rem;
-    font-size: 2.5rem;
+    margin-top: 2rem;
 }
 
-/* 随机语录区 */
+.hero p {
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+/* 果冻风卡片 */
+#random-quote-box, ul.list-items li {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 #random-quote-box {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 12px;
+    padding: 2.5rem;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    margin-bottom: 2rem;
-    border-left: 5px solid var(--primary-color);
+    border-left: 6px solid var(--primary-color);
 }
 
 #random-quote-text {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 700;
     font-style: italic;
     color: var(--primary-color);
 }
 
-/* 列表样式 */
 ul.list-items {
     list-style: none;
 }
 
 ul.list-items li {
-    background: #fff;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    padding: 20px;
     display: flex;
     align-items: center;
+    font-size: 1.1rem;
+}
+
+ul.list-items li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 ul.list-items li i {
     color: var(--primary-color);
-    margin-right: 12px;
-    font-size: 1.2rem;
+    margin-right: 15px;
+    font-size: 1.4rem;
 }
 
-/* =========================================
-   无用机器按钮（恢复成瞬间移动）
-========================================= */
-#useless-btn {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    border-radius: 8px;
+/* 按钮 */
+button {
     cursor: pointer;
-    /* 去掉了平滑过渡，恢复瞬移 */
-    transition: all 0.2s;
-    display: flex;
+    font-family: inherit;
+}
+
+#useless-btn, #start-game-btn {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #34d399, #10b981);
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    transition: all 0.3s ease;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 
-/* =========================================
-   游戏区域（草地和小乌龟）
-========================================= */
+#useless-btn:hover, #start-game-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.6);
+}
+
+#useless-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+/* 游戏区域 */
 #game-area {
     width: 100%;
     height: 300px;
-    background: linear-gradient(to bottom, #e0f7fa 0%, #a5d6a7 100%);
+    background: linear-gradient(to bottom, #f0fdf4 0%, #bbf7d0 100%);
     position: relative;
-    border-radius: 8px;
+    border-radius: 20px;
     overflow: hidden;
-    margin-top: 1rem;
-    border: 3px dashed #81c784;
+    margin-top: 1.5rem;
+    border: 2px dashed #86efac;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
 }
 
 #target {
@@ -166,21 +228,28 @@ ul.list-items li i {
     transform: scale(0.8);
 }
 
-/* 通用按钮样式 */
-button {
-    cursor: pointer;
+/* 页脚 */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;
+    color: #64748b;
+    font-size: 0.9rem;
 }
 
-/* 响应式设计（手机端） */
+footer p {
+    margin: 0.5rem 0;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 响应式设计 */
 @media (max-width: 600px) {
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-    #random-quote-text {
-        font-size: 1.2rem;
-    }
+    nav { top: 10px; width: 95%; padding: 10px; }
+    nav ul { flex-direction: column; gap: 10px; }
+    h1 { font-size: 2rem; }
+    #random-quote-text { font-size: 1.3rem; }
 }
