@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>研究项目 | Projects</title>
+    <!-- 浏览器标签页的小乌龟图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐢</text></svg>">
+    <!-- FontAwesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 果冻风样式表 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 导航栏占位符 -->
     <nav id="nav-placeholder"></nav>
 
     <div class="container">
-        <h1 data-i18n="projects_title">我们的研究项目</h1>
-        <p data-i18n="projects_desc">以下是本研究所未来五年（或者可能拖到十年）的计划：</p >
+        <!-- 标题和介绍，使用 data-i18n 实现双语 -->
+        <h1 data-i18n="projects_title" style="text-align: center;">我们的研究项目</h1>
+        <p data-i18n="projects_desc" style="text-align: center; margin-bottom: 2rem;">以下是本研究所未来五年（或者可能拖到十年）的计划：</p >
         
+        <!-- 项目列表容器，内容由下方 JS 动态生成 -->
         <ul class="list-items" id="projects-list"></ul>
     </div>
 
+    <!-- 页脚占位符 -->
+    <footer id="footer-placeholder"></footer>
+
+    <!-- 引入全局脚本 -->
     <script src="nav.js"></script>
     <script src="i18n.js"></script>
+    
+    <!-- 页面专属脚本 -->
     <script>
-        // 注意这里加了 FontAwesome 图标标签 <i>
+        // 项目数据（中英双语，包含了 FontAwesome 图标标签）
         const projectsData = {
             zh: [
                 "<i class='fa-solid fa-clock'></i> <span><strong>研究课题 A：</strong> 探究“整点开始”定律——为什么非要等到 10:00 或 14:30 才能开始工作。</span>",
@@ -39,10 +51,13 @@
             ]
         };
 
+        // 渲染项目列表的函数
         function renderProjects() {
-            const lang = localStorage.getItem('site_lang') || 'zh';
+            const lang = localStorage.getItem('site_lang') || 'zh'; // 默认中文
             const listContainer = document.getElementById('projects-list');
-            listContainer.innerHTML = '';
+            listContainer.innerHTML = ''; // 清空列表
+            
+            // 循环生成列表项
             projectsData[lang].forEach(item => {
                 const li = document.createElement('li');
                 li.innerHTML = item;
@@ -50,7 +65,9 @@
             });
         }
 
+        // 页面加载完成后渲染
         document.addEventListener("DOMContentLoaded", renderProjects);
+        // 当切换语言时，重新渲染
         document.addEventListener("languageChanged", renderProjects);
     </script>
 </body>

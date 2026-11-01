@@ -4,41 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>实验室 | Lab</title>
+    <!-- 浏览器标签页的小乌龟图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐢</text></svg>">
+    <!-- FontAwesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 果冻风样式表 -->
     <link rel="stylesheet" href="style.css">
     <style>
+        /* 局部样式：确保逃跑按钮的容器有相对定位 */
         .machine-section { text-align: center; margin-bottom: 4rem; position: relative; height: 150px; }
-        #useless-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 8px;}
     </style>
 </head>
 <body>
+    <!-- 导航栏占位符 -->
     <nav id="nav-placeholder"></nav>
 
     <div class="container">
-        <h1 data-i18n="machine_title">数字玩具与游戏</h1>
+        <h1 data-i18n="machine_title" style="text-align: center;">数字玩具与游戏</h1>
 
+        <!-- 1. 无用机器 -->
         <section class="machine-section">
             <h2 data-i18n="machine_useless_title">无用机器 (Useless Machine)</h2>
             <p data-i18n="machine_useless_desc">试着点击这个按钮：</p >
-            <!-- 注意这里把图标和文字分开了，防止被JS覆盖 -->
+            <!-- 这个按钮加了 id，会被 machine.js 控制逃跑 -->
             <button id="useless-btn"><i class="fa-solid fa-person-running"></i> <span data-i18n="machine_btn">立刻完成作业</span></button>
         </section>
 
-        <section>
+        <!-- 2. 抓乌龟游戏 -->
+        <section style="text-align: center;">
             <h2 data-i18n="machine_game_title">互动游戏：消灭DDL (抓乌龟)</h2>
-            <p>
+            <p style="margin-top: 10px;">
                 <span data-i18n="machine_score">分数: </span><span id="score">0</span> | 
                 <span data-i18n="machine_time">剩余时间: </span><span id="time">10</span>
             </p >
-            <button id="start-game-btn"><i class="fa-solid fa-play"></i> <span data-i18n="machine_start_btn">开始游戏</span></button>
+            <button id="start-game-btn" style="margin: 15px 0;"><i class="fa-solid fa-play"></i> <span data-i18n="machine_start_btn">开始游戏</span></button>
             
+            <!-- 游戏区域，里面有个小乌龟 Emoji -->
             <div id="game-area">
                 <div id="target">🐢</div>
             </div>
         </section>
     </div>
 
+    <!-- 页脚占位符 -->
+    <footer id="footer-placeholder"></footer>
+
+    <!-- 引入脚本：顺序非常重要 -->
     <script src="nav.js"></script>
     <script src="i18n.js"></script>
     <script src="machine.js"></script>
